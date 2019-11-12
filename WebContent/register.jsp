@@ -23,7 +23,7 @@
 				<div class="well well-lg">
 					<h3> Registration Page</h3>
 					<hr/>
-					<form action="reg" method="post" >
+					<form action="reg" method="post" enctype="multipart/form-data" >
 						<label> Name </label>
 						<input type="text" class="form-control" name="name">
 						<label> Email </label>

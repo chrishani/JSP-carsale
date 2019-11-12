@@ -13,6 +13,13 @@
 				<%@include file="WEB-INF/jspf/sidebar.jsp" %>
 			</div>
 			<div class="col-md-9">
+				<%
+				if(request.getParameter("msg")!=null){
+					out.println("<div class='alert alert-danger'>");
+					out.print(request.getParameter("msg"));
+					out.println("</div>");
+				}
+				%>
 				<div class="well well-lg">
 					<h3> Login Page</h3>
 					<hr/>

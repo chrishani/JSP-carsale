@@ -47,7 +47,7 @@
 						%>
 						<tr>
 							<td> <%=rs.getInt("car.id") %> </td>
-							<td> <img src="../images/default.png" width="100" class="img img-thumbnail"/> </td>
+							<td> <img src="<%=request.getContextPath() %>/<%=rs.getString("car.photo")%>" width="100" class="img img-thumbnail"/> </td>
 							<td> <%=rs.getString("brand.name") %> </td>
 							<td> <%=rs.getString("model.name") %> </td>
 							<td> <%=rs.getString("car.title") %> </td>

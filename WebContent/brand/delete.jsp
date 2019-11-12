@@ -1,6 +1,7 @@
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="com.industrialmaster.carsale.db.DB"%>
+<%@include file="../WEB-INF/jspf/admin_only.jsp" %>
 <%
 	
 	String id = request.getParameter("id");

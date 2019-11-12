@@ -6,6 +6,7 @@
 	<%@include file="../WEB-INF/jspf/head.jsp" %>
 </head>
 <body>
+	<%@include file="../WEB-INF/jspf/admin_only.jsp" %>
 	<div class="container">
 		<%@include file="../WEB-INF/jspf/header.jsp" %>
 		<div class="row">

@@ -1,15 +1,22 @@
 package com.industrialmaster.carsale.actions;
 
+import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import com.industrialmaster.carsale.db.DB;
 
@@ -20,22 +27,58 @@ public class CarAddAction extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// 1. Collect Input Field Values (Fillable)
-		String model_id = request.getParameter("model_id");
-		String title = request.getParameter("title");
-		String description = request.getParameter("description");
-		String price = request.getParameter("price");
-		String milage = request.getParameter("milage");
-		String fuel_type = request.getParameter("fuel_type");
-		String location = request.getParameter("location");
-		String year = request.getParameter("year");
-		String photo = request.getParameter("photo"); 
+		String model_id = null;
+		String title = null;
+		String description = null;
+		String price = null;
+		String milage = null;
+		String fuel_type = null;
+		String location = null;
+		String year = null;
+		String photo = "images/default.png";
+		DiskFileItemFactory factory = new DiskFileItemFactory();
+		ServletFileUpload uploader = new ServletFileUpload(factory);
+		
+		try {
+			List<FileItem> fields = uploader.parseRequest(request);
+			
+			for (FileItem fileItem : fields) {
+				if(!fileItem.isFormField()) {
+					String imageName = fileItem.getName();
+					String path = getServletContext().getRealPath("\\uploads\\");
+					System.out.println("path="+path);
+					File savedFile = new File(path+"/"+imageName);
+					fileItem.write(savedFile);
+					photo = "uploads/"+imageName;
+				}else {
+					
+					String fieldName = fileItem.getFieldName();
+					switch(fieldName) {
+						case "model_id": model_id = fileItem.getString(); break;
+						case "title": title = fileItem.getString(); break;
+						case "description": description = fileItem.getString(); break;
+						case "price": price = fileItem.getString(); break;
+						case "milage": milage = fileItem.getString(); break;
+						case "fuel_type": fuel_type = fileItem.getString(); break;
+						case "location": location = fileItem.getString(); break;
+						case "year": year = fileItem.getString(); break;
+					}
+					
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
 		
 		// 2. Generate Non Fillable
 		Date date = new Date();
 		int imp_count = 0;
 		int view_count = 0;
 		int sold = 0;
-		int member_id = 1; //After Login Created this will Change
+		HttpSession session = request.getSession();
+		int member_id = (int)session.getAttribute("ID"); //After Login Created this will Change
 		
 		String errors = "";
 		// 3. Process Data (Validations)

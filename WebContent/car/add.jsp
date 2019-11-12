@@ -36,7 +36,7 @@
 				<div class="well well-lg">
 					<h3> Car Add </h3>
 					<hr/>
-					<form action="../car_add" method="post" >
+					<form action="../car_add" method="post" enctype="multipart/form-data">
 						<label> Brand </label>
 						<select name="brand_id" class="form-control">
 							<% while(rs1.next()){ %>

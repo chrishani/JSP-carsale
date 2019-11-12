@@ -70,11 +70,11 @@
 								}
 							%>
 							<option  <%=selected %> value="<%=rs2.getInt("id") %>"><%=rs2.getString("name") %></option>
-							<% } %>
+						
 						</select>
 						
 						<label> Title </label>
-						<input type="text" class="form-control" name="title" value="<%=rs.getString("title") %>" >
+						<input type="text" class="form-control" name="title" value="<%=rs.getString("title") %>">
 						<label> Description </label>
 						<textarea  class="form-control" name="description"><%=rs.getString("description") %></textarea>
 						<label> Price </label>
@@ -88,17 +88,14 @@
 						<label> Year </label>
 						<input type="number" class="form-control" name="year" value="<%=rs.getString("year") %>">
 						<label> Photo </label>
-						<input type="file" class="form-control" name="photo" value="<%=rs.getString("photo") %>">
+						<input type="file" class="form-control" name="photo" value="<%=rs.getString("phpto") %>">
 						<hr/>
 						<input type="submit" value="SAVE" class="btn btn-success">
 						<input type="reset" value="RESET" class="btn btn-danger">
 					</form>
 				</div>
 				
-				<%
-					}
-				}
-				%>
+				
 			</div>
 		</div>
 		<%@include file="../WEB-INF/jspf/footer.jsp" %>
